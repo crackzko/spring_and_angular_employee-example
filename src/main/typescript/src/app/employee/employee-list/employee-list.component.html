@@ -1,0 +1,27 @@
+
+<ng-container *ngIf="length == 0; else elseTemplate">    
+    <button mat-raised-button mat-ripple color="primary" (click)="gotoEdit()">
+        create your first employee
+    </button>
+</ng-container>
+<ng-template #elseTemplate>
+    <mat-card>
+        <mat-card-content>
+            <div *ngFor="let employee of employees">
+                <app-employee [employee]="employee" (onDelete)="onDelete($event)"></app-employee>
+            </div>
+                       
+        </mat-card-content>
+        <mat-card-actions>
+            <mat-paginator [length]="length"
+                [pageSize]="pageSize"
+                [pageSizeOptions]="pageSizeOptions"
+                (page)="getEmployees($event)">
+            </mat-paginator>
+            <button mat-raised-button mat-ripple color="primary" (click)="gotoEdit()">
+                create employee
+            </button>
+        </mat-card-actions>
+    </mat-card>     
+</ng-template>
+

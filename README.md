@@ -42,7 +42,10 @@ useUnicode=true\
 &serverTimezone=Europe/Berlin
 ```
 
-## 5. Development
+## 5. Run
+mvnw spring-boot:run -Dspring-boot.run.profiles=local
+
+## 6. Development
 ### Backend (Java)
 The source code is located in ``src/main/java/edu/employee/employeadminbackend`` nothing special there...
 

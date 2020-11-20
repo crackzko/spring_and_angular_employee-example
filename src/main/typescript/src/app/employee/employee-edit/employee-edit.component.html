@@ -1,0 +1,50 @@
+<form ngForm [formGroup]="editFormGroup" autocomplete="on" fxLayout="row" >
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                edit/create employee
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            
+            <mat-form-field appearence="fill" floatLabel="always">
+                <mat-label>First name</mat-label>
+                <input matInput required placeholder="Jimmy-Jimbo-Johnson" [formControl]="firstNameControl">
+                <mat-error *ngIf="firstNameControl.errors?.required">Please enter a first name.</mat-error>
+                <mat-error *ngIf="firstNameControl.errors?.maxLength">This is quite a long name. Too long for me, please short it to less than 128 charactes.</mat-error>
+                <mat-error *ngIf="firstNameControl.errors?.pattern">You entered suspicious characters. That's not okay unless your a cat walking on keyboards!</mat-error>
+            </mat-form-field>
+            <mat-form-field appearence="fill" floatLabel="always">
+                <mat-label>Last name</mat-label>
+                <input matInput required placeholder="Jackelson the 3rd esquire" [formControl]="lastNameControl">
+                <mat-error *ngIf="lastNameControl.errors?.required">Please enter a last name.</mat-error>
+                <mat-error *ngIf="lastNameControl.errors?.maxLength">This is quite a long name. Too long for me, please short it to less than 128 charactes.</mat-error>
+                <mat-error *ngIf="lastNameControl.errors?.pattern">You entered suspicious characters. That's not okay unless your a cat walking on keyboards!</mat-error>
+            </mat-form-field>
+            <mat-form-field appearence="fill" floatLabel="always">
+                <mat-label>Positon</mat-label>
+                <input matInput required placeholder="Cpt. Placeholder" [formControl]="positionControl">
+                <mat-error *ngIf="positionControl.errors?.required">Please enter a position.</mat-error>
+                <mat-error *ngIf="positionControl.errors?.maxLength">This is quite a long position. Too long for me, please short it to less than 128 charactes.</mat-error>
+                <mat-error *ngIf="positionControl.errors?.pattern">You entered suspicious characters. That's not okay unless your a cat walking on keyboards!</mat-error>
+            </mat-form-field>
+                <mat-label>Supervisor</mat-label> 
+                <mat-select [(ngModel)]="supervisor" [ngModelOptions]="{standalone: true}" [disabled]="employees.length == 0" matTooltip="{{employees.length == 0? 'there is nobody who can supervise.' : 'Select a supervisor.'}}">
+                    <mat-option *ngFor="let employee of employees" [value]="employee">
+                        {{employee.firstName}} {{employee.lastName}}
+                    </mat-option>
+                </mat-select>
+            
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button type="button" color="secondary" (click)="goHome()">
+                cancel
+            </button>
+            <span class="buttonWrapper" type="submit" matTooltip="{{editFormGroup.valid? '' : 'Please fill the required fields with no errors.'}}">
+                <button mat-raised-button mat-ripple color="primary" [disabled]="!editFormGroup.valid" (click)="onSubmit()">
+                    save
+                </button>
+            </span>
+        </mat-card-actions>
+    </mat-card>
+</form>
